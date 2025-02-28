@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #d6f0ff; /* Same as the homepage */
+        }
+
+        .top-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff; /* White top panel */
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-panel .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-panel .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .top-panel .logo h1 {
+            font-size: 1.5em;
+            margin: 0;
+            color: #343a40;
+        }
+
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #f8f9fa; /* Matches design */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px; /* To accommodate the top panel */
+        }
+
+        .side-panel a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1em;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .side-panel a:hover {
+            background-color: #e9ecef;
+            color: #0056b3;
+        }
+
+        .main-content {
+            margin-left: 250px; /* Matches the width of the side panel */
+            padding: 20px;
+        }
+
+        .dashboard-section {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-section h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+            color: #343a40;
+        }
+
+        .dashboard-section p {
+            margin: 0 0 20px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .subscription-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .subscription-box {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .subscription-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .subscription-box h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .subscription-box p {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .subscription-box button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .subscription-box button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-panel">
+        <div class="logo">
+            <a href="homepage2.html">
+                <img src="company_logo.png" alt="Logo">
+            </a>
+            <h1>Dashboard</h1>
+        </div>        
+    </div>
+    <div class="side-panel">
+        <a href="#profile">Profile</a>
+        <a href="#notifications">Notifications</a>
+        <a href="#settings">Settings</a>
+        <a href="#subscription">Subscription</a>
+        <a href="#logout">Logout</a>
+    </div>
+    <div class="main-content">
+        <div id="profile" class="dashboard-section">
+            <h2>Profile</h2>
+            <div id="userProfile">
+                <p>Loading user data...</p> <!-- Placeholder content -->
+            </div>
+        </div>
+        <div id="notifications" class="dashboard-section">
+            <h2>Notifications</h2>
+            <ul class="notifications">
+                <li>You have a new message.</li>
+                <li>Your appointment is confirmed.</li>
+                <li>System maintenance scheduled for tomorrow.</li>
+            </ul>
+        </div>
+        <div id="settings" class="dashboard-section">
+            <h2>Settings</h2>
+            <p>Adjust your preferences and configure the dashboard.</p>
+        </div>
+        <div id="subscription" class="dashboard-section">
+            <h2>Subscription</h2>
+            <p>Select a subscription plan that suits your needs:</p>
+            <div class="subscription-sections">
+                <div class="subscription-box">
+                    <h3>Basic Plan</h3>
+                    <p>Ideal for individuals. Includes basic features and support.</p>
+                    <button>Choose Basic</button>
+                </div>
+                <div class="subscription-box">
+                    <h3>Premium Plan</h3>
+                    <p>Great for professionals. Offers premium features and 24/7 support.</p>
+                    <button>Choose Premium</button>
+                </div>
+                <div class="subscription-box">
+                    <h3>Enterprise Plan</h3>
+                    <p>Designed for businesses. Includes all features and priority support.</p>
+                    <button>Choose Enterprise</button>
+                </div>
+            </div>
+        </div>
+        <div id="logout" class="dashboard-section">
+            <a href="homepage.html"><h2>Log Out</h2></a>
+            <p>Click here to safely log out of your account.</p>
+        </div>
+    </div>
+    <script>
+        // Parse URL parameters to fetch user data
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const gender = params.get('gender');
+        
+        // Display user data in the Profile section
+        const userProfile = document.getElementById('userProfile');
+        if (name && gender) {
+            userProfile.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+            `;
+        } else {
+            userProfile.innerHTML = '<p>No user data available.</p>';
+        }
+    </script>
+    
+    <div id="profile" class="dashboard-section">
+        <h2>Profile</h2>
+        <div id="userProfile">
+            <p>No user data available.</p>
+        </div>
+    </div>    
+</body>
+</html>

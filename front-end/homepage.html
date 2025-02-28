@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #d6f0ff;
+            overflow: hidden;
+        }
+
+        .top-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5em;
+            margin: 0;
+            color: #343a40;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: rgb(0, 179, 255);
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .login-icon {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(249, 249, 249) 100%);
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .login-icon:hover {
+            opacity: 0.9;
+        }
+
+        .login-icon::after {
+            content: '\2192';
+            font-size: 1em;
+            margin-left: 10px;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgb(8, 206, 246);
+        }
+
+        .hero-section h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .product-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+        }
+
+        .product {
+            display: flex;
+            width: 30%;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 50%;
+            background-color: #d6f0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            width: 80%;
+            border-radius: 10px;
+        }
+
+        .product-details {
+            width: 50%;
+            background-color: #d6f0ff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-details h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #343a40;
+        }
+
+        .product-details p {
+            margin: 10px 0 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .content {
+            height: 2000px;
+            background-color: #d6f0ff;
+        }
+
+        .scroll-container {
+            width: calc(100% - 15px);
+            height: 100vh;
+            overflow-y: scroll;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .blue-hero-section {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(173, 216, 230, 0.8),
+                    rgba(173, 216, 230, 0.8)),
+                url('new-background.jpeg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .blue-hero-section h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .blue-hero-section p {
+            font-size: 1.2em;
+            max-width: 800px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contact Us Section Styles */
+        .contact-section {
+            background-color: #004a8d;
+            /* Slightly dark blue */
+            color: #ffffff;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .contact-part {
+            width: 30%;
+            /* Each part takes up 30% of the section width */
+        }
+
+        .contact-part h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #f8f9fa;
+        }
+
+        .contact-part p,
+        .contact-part a {
+            font-size: 1em;
+            margin: 10px 0;
+            line-height: 1.5;
+            color: #cde4ff;
+            /* Lighter blue for text contrast */
+            text-decoration: none;
+        }
+
+        .contact-part a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        /* About Us Section Styles */
+        .about-section {
+            background-color: #f0f8ff;
+            /* Light blue background */
+            color: #343a40;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .about-section img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scroll-container">
+        <!-- Top Panel -->
+        <div class="top-panel">
+            <div class="logo">
+                <img src="company_logo.png" alt="Logo">
+                <h1>Medical Company</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#Products">Products</a>
+                <a href="#About-Us">About Us</a>
+                <a href="login.html">History</a>
+                <a href="#Contact-Us">Contact Us</a>
+                <a href="login.html" class="login-icon">Login/Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>TEST YOUR FLOW</h1>
+        </div>
+
+        <!-- Products Section -->
+        <div id="Products" class="product-section">
+            <a href="product1.html" class="product">
+                <div class="product-image">
+                    <img src="device1.jpg" alt="Product 1">
+                </div>
+                <div class="product-details">
+                    <h2>Whole Product</h2>
+                    <p>This is a brief description of Product 1.</p>
+                </div>
+            </a>
+            <a href="product2.html" class="product">
+                <div class="product-image">
+                    <img src="device2.png" alt="Product 2">
+                </div>
+                <div class="product-details">
+                    <h2>Device</h2>
+                    <p>This is a brief description of Product 2.</p>
+                </div>
+            </a>
+            <a href="product3.html" class="product">
+                <div class="product-image">
+                    <img src="device3.jpg" alt="Product 3">
+                </div>
+                <div class="product-details">
+                    <h2>Dispensaries</h2>
+                    <p>This is a brief description of Product 3.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- <div class="content"></div> -->
+
+        <!-- New Hero-Section-like compartment -->
+        <div class="blue-hero-section">
+            <h1>OUR GOAL</h1>
+            <p> Is delivering innovative solutions for medical diagnostics and monitoring.</p>
+        </div>
+
+        <!-- About Us Section -->
+        <div id="About-Us" class="about-section">
+            <h1>About Us</h1>
+            <p>
+                At Medical Company, we are dedicated to advancing healthcare through innovative solutions.
+                Our mission is to provide cutting-edge medical devices that empower patients and practitioners
+                alike to monitor and improve health outcomes.
+            </p>
+            <img src="team_photo.jpg" alt="Our Team">
+        </div>
+
+        <!-- New Contact Us Section -->
+        <div id="Contact-Us" class="contact-section">
+            <!-- Contact Part 1 -->
+            <div class="contact-part">
+                <h3>Contact Information</h3>
+                <p>Email: support@medicalwebsite.com</p>
+                <p>Phone: +1 (123) 456-7890</p>
+                <p>Address: 123 Medical Lane, Health City, USA</p>
+            </div>
+            <!-- Contact Part 2 -->
+            <div class="contact-part">
+                <h3>Quick Links</h3>
+                <a href="#Products">Our Products</a>
+                <a href="#About-Us">About Us</a>
+                <a href="history.html">Your History</a>
+                <a href="login.html">Login/Sign Up</a>
+            </div>
+            <!-- Contact Part 3 -->
+            <div class="contact-part">
+                <h3>Follow Us</h3>
+                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = sessionStorage.getItem("loggedIn");
+            const userSection = document.getElementById("user-section");
+
+            if (isLoggedIn === "true") {
+                userSection.innerHTML = `
+                    <img src="user_profile.png" alt="Profile Photo" id="profile-photo" style="cursor: pointer;">
+                `;
+                document.getElementById("profile-photo").onclick = function() {
+                    window.location.href = "dashboard.html";
+                };
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Medical Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #d6f0ff, #a9d6f7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-logo {
+            margin-bottom: 20px;
+        }
+
+        .login-logo img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .login-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #343a40;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .login-form input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+        }
+
+        .login-button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: -8px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .register-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .register-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="login-logo">
+            <img src="company_logo.png" alt="Company Logo">
+        </div>
+        <!-- Title Section -->
+        <h2 class="login-title">Login to Your Account</h2>
+        <!-- Login Form -->
+        <form class="login-form" id="loginForm">
+            <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+            <p class="error-message" id="emailError">Please enter a valid email address.</p>
+
+            <input type="password" id="loginPassword" name="password" placeholder="Enter your password" minlength="6" required>
+            <p class="error-message" id="passwordError">Password must be at least 6 characters long.</p>
+
+            <button type="button" class="login-button" onclick="loginUser()">Login</button>
+        </form>
+        <!-- Register Link -->
+        <div class="register-link">
+            Don't have an account? <a href="register.html">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        async function loginUser() {
+            // Get input values
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            // Error message elements
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+
+            // Validation checks
+            let isValid = true;
+
+            // Validate email
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            // If validation fails, stop here
+            if (!isValid) return;
+
+            try {
+                // API call
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                // Handle response
+                if (response.ok) {
+                    localStorage.setItem('authToken', data.token);
+                    alert('Login successful');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.message || 'Login failed. Please try again.');
+                }
+            } catch (error) {
+                alert('An error occurred. Please try again later.');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
